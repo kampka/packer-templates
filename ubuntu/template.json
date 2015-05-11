@@ -1,0 +1,87 @@
+{
+    "variables": {
+        "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.2-desktop-amd64.iso"
+        , "iso_checksum": "39eeb28bdb8af630850e75e54b9864ca07640a2bb10bd10055763236b99f9b1d"
+        , "iso_checksum_type": "sha256"
+        , "user": "root"
+        , "password": "packer"
+        , "disk_size": 5000
+        , "domain": ""
+        , "ssh_timeout": "50000s"
+    },
+
+    "builders": [
+        {
+            "type": "qemu"
+            , "iso_url": "{{user `iso_url`}}"
+            , "iso_checksum": "{{user `iso_checksum`}}"
+            , "iso_checksum_type": "{{user `iso_checksum_type`}}"
+
+            , "type": "qemu"
+            , "format": "qcow2"
+            , "accelerator": "kvm"
+            , "disk_size": "{{ user `disk_size`}}"
+            , "disk_interface": "virtio"
+            , "headless": true
+
+            , "http_directory": "http"
+
+            , "ssh_username": "{{ user `user`}}"
+            , "ssh_password": "{{ user `password`}}"
+            , "ssh_wait_timeout": "{{ user `ssh_timeout`}}"
+
+            , "shutdown_command": "shutdown -P now"
+
+            , "http_directory": "http"
+
+            , "boot_wait": "1s"
+            , "boot_command": [
+				"<esc><wait><wait><esc><wait5>"
+                , "<f6><wait><esc>"
+                , "<left><left><left>text<spacebar>noprompt<spacebar><enter><wait10><wait10>"
+                , "sudo su<enter><wait><wait>"
+                , "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/configure_ssh.sh -O /tmp/configure_ssh.sh ; chmod +x /tmp/configure_ssh.sh ; /tmp/configure_ssh.sh<enter>"
+            ]
+
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "file"
+            , "source": "scripts/chroot.sh"
+            , "destination": "/tmp/chroot.sh"
+        },
+        {
+            "type": "file"
+            , "source": "files/vagrant.pub"
+            , "destination": "/tmp/vagrant.pub"
+        },
+        {
+            "scripts": [
+                "scripts/base.sh"
+            ]
+            , "type": "shell"
+        }
+    ],
+
+    "post-processors": [{
+        "output": "box/ubuntu-trusty.box"
+        , "type": "vagrant"
+        , "vagrantfile_template": "./Vagrantfile.template"
+    },
+    {
+        "type": "atlas"
+        , "artifact": "kampka/ubuntu"
+        , "artifact_type": "vagrant.box"
+        , "metadata": {
+            "provider": "libvirt"
+            , "version": "1.0"
+            , "created_at": "{{timestamp}}"
+        }
+    }],
+
+    "push": {
+        "name": "kampka/ubuntu"
+    }
+}
