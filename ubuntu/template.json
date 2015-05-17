@@ -69,19 +69,5 @@
         "output": "box/ubuntu-trusty.box"
         , "type": "vagrant"
         , "vagrantfile_template": "./Vagrantfile.template"
-    },
-    {
-        "type": "atlas"
-        , "artifact": "kampka/ubuntu"
-        , "artifact_type": "vagrant.box"
-        , "metadata": {
-            "provider": "libvirt"
-            , "version": "1.0"
-            , "created_at": "{{timestamp}}"
-        }
-    }],
-
-    "push": {
-        "name": "kampka/ubuntu"
-    }
+    }]
 }

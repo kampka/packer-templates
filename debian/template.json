@@ -68,19 +68,5 @@
         "output": "box/debian-jessie.box"
         , "type": "vagrant"
         , "vagrantfile_template": "./Vagrantfile.template"
-    },
-    {
-        "type": "atlas"
-        , "artifact": "kampka/debian"
-        , "artifact_type": "vagrant.box"
-        , "metadata": {
-            "provider": "libvirt"
-            , "version": "1.0"
-            , "created_at": "{{timestamp}}"
-        }
-    }],
-
-    "push": {
-        "name": "kampka/debian"
-    }
+    }]
 }
