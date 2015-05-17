@@ -54,16 +54,14 @@ echo "Configuring network interfaces"
 
 pacman -S --noconfirm net-tools
 
-systemctl enable systemd-networkd.service
-
-cat <<EOF > /etc/systemd/network/dhcp.network
-[Match]
-Name=e*
-[Network]
-DHCP=yes
-[DHCPv4]
-UseHostname=false
+cat <<EOF > /etc/netctl/eth0
+Description='A basic dhcp ethernet connection'
+Interface=eth0
+Connection=ethernet
+IP=dhcp
 EOF
+
+netctl enable eth0
 
 pacman -S --noconfirm btrfs-progs
 sed -i 's/filesystems/filesystems btrfs/g' /etc/mkinitcpio.conf
