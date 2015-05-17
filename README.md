@@ -16,6 +16,7 @@ Beside that, these boxes provide:
  * 5 GB qcow2 harddrive
  * A BTRFS root file system
  * Root user access over ssh via the Vagrant public key
+ * Root user password: `packer`
  * Unidirectional file and folder sync from the host to the machine
  * No vagrant user and login
  * No swap
