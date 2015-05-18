@@ -52,13 +52,15 @@ echo "root:packer" | chpasswd
 
 echo "Configuring network interfaces"
 
-pacman -S --noconfirm net-tools
+pacman -S --noconfirm net-tools dhclient
 
 cat <<EOF > /etc/netctl/eth0
 Description='A basic dhcp ethernet connection'
 Interface=eth0
 Connection=ethernet
 IP=dhcp
+DHCPClient=dhclient
+
 EOF
 
 netctl enable eth0
