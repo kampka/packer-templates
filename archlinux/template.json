@@ -5,7 +5,7 @@
         , "iso_checksum_type": "sha1"
         , "user": "root"
         , "password": "packer"
-        , "disk_size": 5000
+        , "disk_size": "5000"
         , "domain": ""
         , "ssh_timeout": "50000s"
     },
