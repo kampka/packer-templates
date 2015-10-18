@@ -76,5 +76,9 @@
         , "metadata": {
           "provider": "libvirt"
         }
-    }]
+    }],
+
+    "push": {
+      "name": "kampka/alpine"
+    }
 }
