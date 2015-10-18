@@ -22,4 +22,7 @@ deployment:
   publish:
     branch: master
     commands:
-      - CURDIR="$(pwd)"; find . -name template.json | while read template; do cd "$CURDIR/$(dirname $template)" && packer push --name "kampka/$(basename $(dirname $template))" template.json ; done
+      - cd alpine && packer push template.json
+      - cd archlinux && packer push template.json
+      - cd debian && packer push template.json
+      - cd ubuntu && packer push template.json
