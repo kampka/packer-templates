@@ -1,11 +1,11 @@
 {
     "variables": {
-        "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.2-desktop-amd64.iso"
-        , "iso_checksum": "39eeb28bdb8af630850e75e54b9864ca07640a2bb10bd10055763236b99f9b1d"
+        "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.3-desktop-amd64.iso"
+        , "iso_checksum": "756a42474bc437f614caa09dbbc0808038d1a586d172894c113bb1c22b75d580"
         , "iso_checksum_type": "sha256"
         , "user": "root"
         , "password": "packer"
-        , "disk_size": 5000
+        , "disk_size": "5000"
         , "domain": ""
         , "ssh_timeout": "50000s"
     },
