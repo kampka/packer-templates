@@ -57,7 +57,7 @@ echo "root:packer" | chpasswd
 
 echo "Configuring network interfaces"
 
-apt-get -yq install net-tools
+apt-get -yq install net-tools isc-dhcp-client
 
 cat > /etc/network/interfaces.d/loopback <<EOF
 # The loopback network interface

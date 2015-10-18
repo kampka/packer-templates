@@ -1,11 +1,11 @@
 {
     "variables": {
-        "iso_url": "http://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-8.0.0-amd64-standard.iso"
-        , "iso_checksum": "857a6a8a46d24821f1a3d655ac539ffc1d13c80e429db44721ca7cecb6a9ab4ede3a329921f2abf968c0312349cefcda4ab5471eeeed14e1fe9a2229d2509c46"
-        , "iso_checksum_type": "sha512"
+        "iso_url": "http://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-8.2.0-amd64-standard.iso"
+        , "iso_checksum": "d1672114104edd0926c47e1b6af22072bfcaab976a2f7996499d4d7be77d4a04"
+        , "iso_checksum_type": "sha256"
         , "user": "root"
         , "password": "packer"
-        , "disk_size": 5000
+        , "disk_size": "5000"
         , "domain": ""
         , "ssh_timeout": "50000s"
     },
@@ -68,5 +68,15 @@
         "output": "box/debian-jessie.box"
         , "type": "vagrant"
         , "vagrantfile_template": "./Vagrantfile.template"
+        , "keep_input_artifact": true
+    }, {
+        "type": "atlas"
+        , "artifact": "kampka/debian"
+        , "artifact_type": "vagrant.box"
+        , "metadata": {
+          "provider": "libvirt"
+           , "version": "1.0"
+           , "created_at": "{{timestamp}}"
+        }
     }]
 }
