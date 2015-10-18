@@ -1,0 +1,25 @@
+machine:
+  timezone: Europe/Berlin
+
+  environment:
+    PACKER_VERSION: 0.8.6
+
+dependencies:
+  pre:
+    - >
+      sudo apt-get install -qq wget unzip &&
+      sudo mkdir /opt/packer &&
+      pushd /opt/packer &&
+      echo "Downloading packer ${PACKER_VERSION}..." &&
+      sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/packer_${PACKER_VERSION}_linux_amd64.zip &&
+      echo "Installing packer ${PACKER_VERSION}..." &&
+      sudo unzip packer_${PACKER_VERSION}_linux_amd64.zip &&
+      sudo rm packer_${PACKER_VERSION}_linux_amd64.zip &&
+      pushd /usr/bin &&
+      sudo ln -s /opt/packer/* .
+
+deployment:
+  publish:
+    branch: master
+    commands:
+      - CURDIR="$(pwd)"; find . -name template.json | while read template; do cd "$CURDIR/$(dirname $template)" && packer push --name "kampka/$(basename $(dirname $template))" template.json ; done
