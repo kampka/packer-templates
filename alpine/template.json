@@ -1,0 +1,82 @@
+{
+    "variables": {
+        "iso_url": "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.2/releases/x86_64/alpine-3.2.3-x86_64.iso"
+        , "iso_checksum": "57f6faf5e065e4063cb8bf61b42566d89e50e81f0ff850f1aa33a7558194a316"
+        , "iso_checksum_type": "sha256"
+        , "user": "root"
+        , "password": "packer"
+        , "disk_size": "5000"
+        , "domain": ""
+        , "ssh_timeout": "50000s"
+    },
+
+    "builders": [
+        {
+            "type": "qemu"
+            , "iso_url": "{{user `iso_url`}}"
+            , "iso_checksum": "{{user `iso_checksum`}}"
+            , "iso_checksum_type": "{{user `iso_checksum_type`}}"
+
+            , "type": "qemu"
+            , "format": "qcow2"
+            , "accelerator": "kvm"
+            , "disk_size": "{{ user `disk_size`}}"
+            , "disk_interface": "virtio"
+            , "headless": false
+
+            , "http_directory": "http"
+
+            , "ssh_username": "{{ user `user`}}"
+            , "ssh_password": "{{ user `password`}}"
+            , "ssh_wait_timeout": "{{ user `ssh_timeout`}}"
+
+            , "shutdown_command": "poweroff"
+
+            , "http_directory": "http"
+
+            , "boot_wait": "10s"
+            , "boot_command": [
+                "root<enter><wait>"
+                , "apk add dhcpcd<enter><wait>"
+                , "dhcpcd eth0<enter><wait5>"
+                , "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/configure_ssh.sh -O /tmp/configure_ssh.sh ; chmod +x /tmp/configure_ssh.sh ; /bin/sh /tmp/configure_ssh.sh<enter>"
+            ]
+
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "file"
+            , "source": "scripts/chroot.sh"
+            , "destination": "/tmp/chroot.sh"
+        },
+        {
+            "type": "file"
+            , "source": "files/vagrant.pub"
+            , "destination": "/tmp/vagrant.pub"
+        },
+        {
+            "scripts": [
+                "scripts/base.sh"
+            ]
+            , "type": "shell"
+        }
+    ],
+
+    "post-processors": [{
+        "output": "box/alpine.box"
+        , "type": "vagrant"
+        , "vagrantfile_template": "./Vagrantfile.template"
+        , "keep_input_artifact": true
+    }, {
+        "type": "atlas"
+        , "artifact": "kampka/ubuntu"
+        , "artifact_type": "vagrant.box"
+        , "metadata": {
+          "provider": "libvirt"
+           , "version": "1.0"
+           , "created_at": "{{timestamp}}"
+        }
+    }]
+}
