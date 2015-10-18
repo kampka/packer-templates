@@ -66,8 +66,19 @@
     ],
 
     "post-processors": [{
-        "output": "box/ubuntu-trusty.box"
+        "output": "box/ubuntu.box"
         , "type": "vagrant"
         , "vagrantfile_template": "./Vagrantfile.template"
-    }]
+    }, {
+        "type": "atlas"
+        , "artifact": "kampka/ubuntu"
+        , "artifact_type": "vagrant.box"
+        , "metadata": {
+          "provider": "libvirt"
+        }
+    }],
+
+    "push": {
+      "name": "kampka/ubuntu"
+    }
 }

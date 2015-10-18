@@ -71,12 +71,10 @@
         , "keep_input_artifact": true
     }, {
         "type": "atlas"
-        , "artifact": "kampka/ubuntu"
+        , "artifact": "kampka/alpine"
         , "artifact_type": "vagrant.box"
         , "metadata": {
           "provider": "libvirt"
-           , "version": "1.0"
-           , "created_at": "{{timestamp}}"
         }
     }]
 }
