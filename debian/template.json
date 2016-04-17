@@ -1,7 +1,7 @@
 {
     "variables": {
-        "iso_url": "http://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-8.2.0-amd64-standard.iso"
-        , "iso_checksum": "d1672114104edd0926c47e1b6af22072bfcaab976a2f7996499d4d7be77d4a04"
+        "iso_url": "http://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-8.4.0-amd64-standard.iso"
+        , "iso_checksum": "2473b2a7ff36a90abe4889646b6651edb05093edc56bf734b4cf8f0ef6f74791"
         , "iso_checksum_type": "sha256"
         , "user": "root"
         , "password": "packer"

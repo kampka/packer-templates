@@ -58,6 +58,7 @@ echo "Configuring network interfaces"
 
 apt-get -yq install net-tools isc-dhcp-client
 
+mkdir -p /etc/network/interfaces.d
 cat > /etc/network/interfaces.d/loopback <<EOF
 # The loopback network interface
 auto lo

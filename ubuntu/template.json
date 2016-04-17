@@ -1,7 +1,7 @@
 {
     "variables": {
-        "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.3-desktop-amd64.iso"
-        , "iso_checksum": "756a42474bc437f614caa09dbbc0808038d1a586d172894c113bb1c22b75d580"
+        "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.4-desktop-amd64.iso"
+        , "iso_checksum": "7d9337e7b19d74b197100035ffa4318999e2d6a875bba020cfe197faeb98e904"
         , "iso_checksum_type": "sha256"
         , "user": "root"
         , "password": "packer"
