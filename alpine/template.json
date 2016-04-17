@@ -1,7 +1,7 @@
 {
     "variables": {
-        "iso_url": "http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v3.2/releases/x86_64/alpine-3.2.3-x86_64.iso"
-        , "iso_checksum": "57f6faf5e065e4063cb8bf61b42566d89e50e81f0ff850f1aa33a7558194a316"
+        "iso_url": "http://dl-1.alpinelinux.org/alpine/v3.3/releases/x86_64/alpine-extended-3.3.0-x86_64.iso"
+        , "iso_checksum": "deb320048dbc3bb4b8530e58f5fa3bc1cc9d9480290b50250998a8b1cc619d90"
         , "iso_checksum_type": "sha256"
         , "user": "root"
         , "password": "packer"
@@ -41,7 +41,6 @@
                 , "dhcpcd eth0<enter><wait5>"
                 , "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/configure_ssh.sh -O /tmp/configure_ssh.sh ; chmod +x /tmp/configure_ssh.sh ; /bin/sh /tmp/configure_ssh.sh<enter>"
             ]
-
         }
     ],
 

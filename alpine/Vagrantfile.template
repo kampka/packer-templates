@@ -12,5 +12,8 @@ Vagrant.configure("2") do |config|
     domain.video_type = "qxl"
     domain.graphics_type = "spice"
   end
-  config.vm.synced_folder './', '/vagrant', type: 'rsync'
+  config.vm.provider :libvirt do |v, override|
+    override.vm.synced_folder './', '/vagrant', type: 'rsync'
+  end
+  config
 end

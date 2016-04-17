@@ -40,7 +40,7 @@ EOF
 ALPINE_MIRROR="http://dl-3.alpinelinux.org/alpine/latest-stable/main"
 echo "$ALPINE_MIRROR" > /etc/apk/repositories
 apk update
-apk add btrfs-progs
+apk add btrfs-progs e2fsprogs
 
 echo "Formating ${DEVICE}1 with ext4"
 mkfs.ext4 -L boot "${DEVICE}1"
