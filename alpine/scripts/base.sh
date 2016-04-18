@@ -37,7 +37,7 @@ p
 w
 EOF
 
-ALPINE_MIRROR="http://dl-3.alpinelinux.org/alpine/latest-stable/main"
+ALPINE_MIRROR="http://nl.alpinelinux.org/alpine/v3.3/main"
 echo "$ALPINE_MIRROR" > /etc/apk/repositories
 apk update
 apk add btrfs-progs e2fsprogs
