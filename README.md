@@ -1,5 +1,6 @@
 A collection of packer.io templates
 ===================================
+[![Circle CI](https://circleci.com/gh/kampka/packer-templates.svg?style=svg)](https://circleci.com/gh/kampka/packer-templates)
 
 This repository contains templates for building virtual machines and [Vagrant](http://www.vagrantup.com/) boxes using [Packer](http://www.packer.io/).
 These templates are designed to build with the QMU/KVM virtualization software using packers QEMU builder support. Running the resulting Vagrant boxes will require the [vagrant-libvirt](https://github.com/pradels/vagrant-libvirt) plugin for Vagrant.
