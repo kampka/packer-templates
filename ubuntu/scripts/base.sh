@@ -47,7 +47,7 @@ mkdir -p /mnt/boot
 mount "${DEVICE}1" /mnt/boot
 
 echo "Debootstraping rootfs"
-debootstrap --variant=minbase --arch=amd64 trusty /mnt
+debootstrap --variant=minbase --arch=amd64 xenial /mnt
 
 echo "Mounting chroot file systems"
 mount -t proc none /mnt/proc

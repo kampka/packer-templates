@@ -1,7 +1,7 @@
 {
     "variables": {
-        "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.4-desktop-amd64.iso"
-        , "iso_checksum": "7d9337e7b19d74b197100035ffa4318999e2d6a875bba020cfe197faeb98e904"
+        "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04-desktop-amd64.iso"
+        , "iso_checksum": "4bcec83ef856c50c6866f3b0f3942e011104b5ecc6d955d1e7061faff86070d4"
         , "iso_checksum_type": "sha256"
         , "user": "root"
         , "password": "packer"
@@ -30,16 +30,21 @@
             , "ssh_password": "{{ user `password`}}"
             , "ssh_wait_timeout": "{{ user `ssh_timeout`}}"
 
-            , "shutdown_command": "shutdown -P now"
+            , "shutdown_command": "/tmp/poweroff.sh"
 
             , "http_directory": "http"
 
             , "boot_wait": "1s"
             , "boot_command": [
-				"<esc><wait><wait><esc><wait5>"
+                "<esc><wait><wait><esc><wait5>"
                 , "<f6><wait><esc>"
-                , "<left><left><left>text<spacebar>noprompt<spacebar><enter><wait10><wait10>"
+                , "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>"
+                , "/install/vmlinuz boot=casper initrd=/casper/initrd.lz init=/bin/bash"
+                , " --<enter><wait10>"
                 , "sudo su<enter><wait><wait>"
+                , "dhclient<enter><wait><wait>"
+                , "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/resolv.conf -O /etc/resolv.conf<enter>"
+                , "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.sh -O /tmp/poweroff.sh; chmod +x /tmp/poweroff.sh<enter>"
                 , "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/configure_ssh.sh -O /tmp/configure_ssh.sh ; chmod +x /tmp/configure_ssh.sh ; /tmp/configure_ssh.sh<enter>"
             ]
 
